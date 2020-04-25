@@ -12,8 +12,9 @@ class Db implements \creative\interfaces\ServiceInterface
 
     /**
      * @param array $params
+     * @return $this
      */
-    public function init(array $params)
+    public function init(array $params = []): self
     {
         $this->params = $params;
         $dsn = "mysql:dbname=$params[database];host=$params[hostname]";
@@ -22,5 +23,7 @@ class Db implements \creative\interfaces\ServiceInterface
         } catch (PDOException $e) {
             echo 'Подключение не удалось: ' . $e->getMessage();
         }
+
+        return $this;
     }
 }

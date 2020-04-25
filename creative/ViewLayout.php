@@ -31,9 +31,22 @@ class ViewLayout
         ob_start();
         $app = $this->app;
         $this->breadcrumbs = [];
-        require_once $phpFile;
-        $this->content = ob_get_clean();
-        require_once $this->getLayoufFile();
+        if (file_exists($phpFile)) {
+            require_once $phpFile;
+            $this->content = ob_get_clean();
+        } else {
+            header('HTTP/1.0 404 Not Found');
+            echo "<h1>404 Not Found</h1>";
+            echo "<h3>Is script <big>$phpFile</big> exists?</h3>";
+        }
+
+        if (file_exists($this->getLayoufFile())) {
+            require_once $this->getLayoufFile();
+        } else {
+            header('HTTP/1.0 404 Not Found');
+            echo "<h1>404 Not Found</h1>";
+            echo "<h3>Is layout <big>{$this->getLayoufFile()}</big> exists?</h3>";
+        }
     }
 
     /**

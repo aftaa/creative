@@ -9,5 +9,5 @@ namespace creative\interfaces;
  */
 interface ServiceInterface
 {
-    public function init(array $params);
+    public function init(array $params = []): self;
 }

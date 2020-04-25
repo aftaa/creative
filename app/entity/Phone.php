@@ -3,7 +3,7 @@
 
 namespace app\entity;
 
-use helper\PhoneFormatter;
+use Exception;
 
 /**
  * Class Phone
@@ -11,24 +11,37 @@ use helper\PhoneFormatter;
  */
 class Phone
 {
-    private int $phone;
-    private Person $person;
+    private string $phone;
 
     /**
      * Phone constructor.
-     * @param int $phone
+     * @param string $phone
+     * @throws Exception
      */
-    public function __construct(int $phone)
+    public function __construct(string $phone)
     {
-        $this->phone = $phone;
+        $this->setPhone($phone);
     }
 
     /**
-     * @param PhoneFormatter $formatter
      * @return string
      */
-    public function getPhone(PhoneFormatter $formatter): string
+    public function getPhone(): string
     {
-        return $formatter->format($this);
+        return $this->phone;
+    }
+
+    /**
+     * @param string $phone
+     * @return $this
+     * @throws Exception
+     */
+    public function setPhone(string $phone): Phone
+    {
+        if (10 != strlen($phone)) {
+            throw new Exception("Phone number must length 10.");
+        }
+        $this->phone = $phone;
+        return $this;
     }
 }

@@ -4,6 +4,8 @@
 namespace creative;
 
 
+use Exception;
+
 /**
  * Class Kernel
  * @package creative
@@ -22,7 +24,7 @@ class Kernel
     }
 
     /**
-     *
+     * @throws Exception
      */
     public function run()
     {
@@ -30,7 +32,7 @@ class Kernel
             'config' => &$this->config,
         ];
 
-        new ServiceLocator($app);
+        (new ServiceLocator($app))->locateService();
 
         (new Router)->route(
             (new ViewLayout($app))

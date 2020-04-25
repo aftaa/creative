@@ -28,7 +28,6 @@ class Router
     private function detectRoute(): string
     {
         $route = $_SERVER['REQUEST_URI'];
-        $route = basename($route);
         $route = preg_replace('/\?.*$/', '', $route);
         $route = trim($route, '/');
         return $route;

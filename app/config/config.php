@@ -6,6 +6,8 @@ ini_set('display_errors', '1');
 return [
     'title' => 'Телефонный справочник',
 
+    'phone_number_format' => '+7 XXX XXX-XX-XX',
+
     'layout_path' => 'app/layout',
     'layout'      => '/sticky.php',
 
@@ -20,11 +22,9 @@ return [
             ],
         ],
 
-        'layout' => [
-            'class' => \app\service\Layout::class,
-            'params' => [
-
-            ],
+        'jsonResponse' => [
+            'class' => \app\service\JsonResponse::class,
         ],
+
     ],
 ];

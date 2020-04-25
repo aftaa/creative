@@ -3,6 +3,8 @@
 
 namespace creative;
 
+use creative\interfaces\ServiceInterface;
+use Exception;
 use stdClass;
 
 /**
@@ -11,12 +13,20 @@ use stdClass;
  */
 class ServiceLocator
 {
-    public function init(stdClass $app)
+    /** @var ServiceInterface[] */
+    private array $services;
+
+    public function __construct(stdClass $app)
     {
-        if (!empty($app->config['services'])) {
-            $services = $app->config['services'];
+        foreach ($app->config['services'] as $serviceName => $params) {
+            $service = new $params['class'];
 
-
+            if ($service instanceof ServiceInterface) {
+                $service->init($params['params']);
+                $app->$serviceName = $service;
+            } else {
+                throw new Exception("Class $params[class] isn't instance of ServiceInterface");
+            }
         }
     }
 }

@@ -1,4 +1,8 @@
-<!doctype html>
+<?php
+
+/** @var stdClass $app */
+
+?><!doctype html>
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -15,6 +19,7 @@
 
     <!-- Custom styles for this template -->
     <link href="/css/sticky-footer-navbar.css" rel="stylesheet">
+    <link href="/css/creative.css" rel="stylesheet">
 </head>
 
 <body>
@@ -22,7 +27,7 @@
 <header>
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#"><?= $this->app->config['title'] ?></a>
+        <a class="navbar-brand" href="/"><?= $this->app->config['title'] ?></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarCollapse" aria-controls="navbarCollapse"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -31,20 +36,26 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/create">Внесение информации
+                    </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/list">Просмотр справочника</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/search">Поиск по
+                        номеру телефона</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/find">Поиск по
+                        абоненту</a>
                 </li>
             </ul>
             <form class="form-inline mt-2 mt-md-0">
                 <input class="form-control mr-sm-2" type="text"
-                       placeholder="Search" aria-label="Search">
+                       placeholder="Поиск" aria-label="Поиск">
                 <button class="btn btn-outline-success my-2 my-sm-0"
-                        type="submit">Search
+                        type="submit">Поиск
                 </button>
             </form>
         </div>
@@ -55,18 +66,29 @@
 <main role="main" class="container">
     <h1 class="mt-5"><?= $this->app->config['title'] ?></h1>
 
+    <?php if ($this->breadcrumbs): ?>
+        &gt; <a href="/"><?= $app->config['title'] ?></a>
+        <?php foreach ($this->breadcrumbs as $breadcrumb): ?>
+            <?php if (!empty($breadcrumb['href'])): ?>
+                &gt;
+                <a href="<?= $breadcrumb['href'] ?>"><?= $breadcrumb['name'] ?></a>
+            <?php else: ?>
+                &gt; <?= $breadcrumb['name'] ?>
+            <?php endif ?>
+        <?php endforeach ?>
+    <?php endif ?>
+
     <p class="lead">
         <?= $this->content ?? '' ?>
     </p>
 
-<!--    <p class="lead">Pin a fixed-height footer to the bottom of the viewport in-->
-<!--        desktop browsers with this custom HTML and CSS. A fixed navbar has been-->
-<!--        added with <code>padding-top: 60px;</code> on the <code>body &gt;-->
-<!--            .container</code>.</p>-->
-<!--    <p>Back to <a href="../sticky-footer/">the default sticky footer</a> minus-->
-<!--        the navbar.</p>-->
+    <!--    <p class="lead">Pin a fixed-height footer to the bottom of the viewport in-->
+    <!--        desktop browsers with this custom HTML and CSS. A fixed navbar has been-->
+    <!--        added with <code>padding-top: 60px;</code> on the <code>body &gt;-->
+    <!--            .container</code>.</p>-->
+    <!--    <p>Back to <a href="../sticky-footer/">the default sticky footer</a> minus-->
+    <!--        the navbar.</p>-->
 </main>
-
 
 
 <footer class="footer">

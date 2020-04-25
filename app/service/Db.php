@@ -6,14 +6,21 @@ namespace app\service;
 
 use PDO;
 
-class Db implements \creative\interfaces\DbConnectionInterface
+class Db implements \creative\interfaces\ServiceInterface
 {
+    private PDO $dbh;
 
     /**
-     * @inheritDoc
+     * @param array $params
      */
-    public function connect(string $host, string $user, string $pass, string $db): PDO
+    public function init(array $params)
     {
-        // TODO: Implement connect() method.
+        $this->params = $params;
+        $dsn = "mysql:dbname=$params[database];host=$params[hostname]";
+        try {
+            $this->dbh = new PDO($dsn, $params['username'], $params['password']);
+        } catch (PDOException $e) {
+            echo 'Подключение не удалось: ' . $e->getMessage();
+        }
     }
 }

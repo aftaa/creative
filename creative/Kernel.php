@@ -30,9 +30,10 @@ class Kernel
             'config' => $this->config,
         ];
 
-        (new Router)
-            ->route(
-                (new ViewLayout($app))
-            );
+        new ServiceLocator($app);
+
+        (new Router)->route(
+            (new ViewLayout($app))
+        );
     }
 }

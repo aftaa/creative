@@ -1,3 +1,11 @@
+<?php
+
+$this->breadcrumbs[] = [
+    'name' => 'Техническое задание',
+];
+
+?>
+
 <div class="container">
     <div class="row">
         <div class="col col-lg-8">

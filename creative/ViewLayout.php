@@ -24,12 +24,14 @@ class ViewLayout
     }
 
     /**
-     * @param string $viewFile
+     * @param string $phpFile
      */
-    public function capture(string $viewFile)
+    public function capture(string $phpFile): void
     {
         ob_start();
-        require_once $viewFile;
+        $app = $this->app;
+        $this->breadcrumbs = [];
+        require_once $phpFile;
         $this->content = ob_get_clean();
         require_once $this->getLayoufFile();
     }
@@ -37,7 +39,7 @@ class ViewLayout
     /**
      * @return string
      */
-    private function getLayoufFile()
+    private function getLayoufFile(): string
     {
         return join('/', [
             $this->app->config['layout_path'],

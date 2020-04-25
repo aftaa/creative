@@ -3,6 +3,10 @@
 error_reporting(E_ALL & ~E_DEPRECATED);
 ini_set('display_errors', '1');
 
+if (file_exists(__DIR__ . '/config.local.php')) {
+    return require_once __DIR__ . '/config.local.php';
+}
+
 return [
     'title' => 'Телефонный справочник',
 
@@ -16,9 +20,9 @@ return [
             'class'  => \app\service\Db::class,
             'params' => [
                 'hostname' => 'localhost',
-                'username' => 'creative',
-                'password' => 'creative',
-                'database' => 'creative',
+                'username' => 'usoafterya_creative',
+                'password' => 'usoafterya_creative',
+                'database' => 'usoafterya_creative',
             ],
         ],
 

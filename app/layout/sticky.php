@@ -19,7 +19,17 @@
 
     <!-- Custom styles for this template -->
     <link href="/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="/js/jquery-3.2.1.slim.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/js/jquery-slim.min.js"><\/script>')</script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!-- creative -->
     <link href="/css/creative.css" rel="stylesheet">
+    <script src="/js/phone.manipulation.js"></script>
 </head>
 
 <body>
@@ -66,17 +76,7 @@
 <main role="main" class="container">
     <h1 class="mt-5"><?= $this->app->config['title'] ?></h1>
 
-    <?php if ($this->breadcrumbs): ?>
-        &gt; <a href="/"><?= $app->config['title'] ?></a>
-        <?php foreach ($this->breadcrumbs as $breadcrumb): ?>
-            <?php if (!empty($breadcrumb['href'])): ?>
-                &gt;
-                <a href="<?= $breadcrumb['href'] ?>"><?= $breadcrumb['name'] ?></a>
-            <?php else: ?>
-                &gt; <?= $breadcrumb['name'] ?>
-            <?php endif ?>
-        <?php endforeach ?>
-    <?php endif ?>
+    <?php require_once '_breadcrumbs.php' ?>
 
     <p class="lead">
         <?= $this->content ?? '' ?>
@@ -101,13 +101,5 @@
     </div>
 </footer>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="/js/jquery-3.2.1.slim.min.js"></script>
-<script>window.jQuery || document.write('<script src="/js/jquery-slim.min.js"><\/script>')</script>
-<script src="/js/popper.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/phone.manipulation.js"></script>
 </body>
 </html>

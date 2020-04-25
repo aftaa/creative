@@ -1,12 +1,12 @@
 <?php
 
 
-namespace mvc\creative;
+namespace creative;
 
 
 /**
  * Class Kernel
- * @package mvc\creative
+ * @package creative
  */
 class Kernel
 {
@@ -21,8 +21,18 @@ class Kernel
         $this->config = $config;
     }
 
+    /**
+     *
+     */
     public function run()
     {
-        (new Router($this->config))->route();
+        $app = (object)[
+            'config' => $this->config,
+        ];
+
+        (new Router)
+            ->route(
+                (new ViewLayout($app))
+            );
     }
 }

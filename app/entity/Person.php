@@ -12,6 +12,16 @@ class Person
     private string $firstName;
     private string $lastName;
     private string $middleName;
+    /** @var array Phone[] */
+    private array $phones = [];
+
+    /**
+     * @return string
+     */
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
 
     /**
      * @param string $firstName
@@ -21,6 +31,14 @@ class Person
     {
         $this->firstName = $firstName;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastName(): string
+    {
+        return $this->lastName;
     }
 
     /**
@@ -34,6 +52,14 @@ class Person
     }
 
     /**
+     * @return string
+     */
+    public function getMiddleName(): string
+    {
+        return $this->middleName;
+    }
+
+    /**
      * @param string $middleName
      * @return Person
      */
@@ -44,26 +70,20 @@ class Person
     }
 
     /**
-     * @return string
+     * @return Phone[]
      */
-    public function getFirstName(): string
+    public function getPhones(): array
     {
-        return $this->firstName;
+        return $this->phones;
     }
 
     /**
-     * @return string
+     * @param Phone[] $phones
+     * @return Person
      */
-    public function getLastName(): string
+    public function setPhones(array $phones): Person
     {
-        return $this->lastName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMiddleName(): string
-    {
-        return $this->middleName;
+        $this->phones = $phones;
+        return $this;
     }
 }

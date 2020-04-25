@@ -12,6 +12,7 @@ use helper\PhoneFormatter;
 class Phone
 {
     private int $phone;
+    private Person $person;
 
     /**
      * Phone constructor.
@@ -23,10 +24,11 @@ class Phone
     }
 
     /**
+     * @param PhoneFormatter $formatter
      * @return string
      */
-    public function getPhone(PhoneFormatter $format): string
+    public function getPhone(PhoneFormatter $formatter): string
     {
-        return $format->format($this);
+        return $formatter->format($this);
     }
 }

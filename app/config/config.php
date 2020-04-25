@@ -4,8 +4,14 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 return [
-    'PHONE_NUMBER_FORMAT_IN' => '',
-    'PHONE_NUMBER_FORMAT_OUT' => '',
+    'title'    => 'Телефонный справочник',
 
-    'FOLDER_CONTROLLER' => 'app/controller',
+    'layout_path' => 'app/layout',
+    'layout'      => '/sticky.php',
+
+    'services' => [
+        'db' => [
+            'class' =>
+        ]
+    ],
 ];

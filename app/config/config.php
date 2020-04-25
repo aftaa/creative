@@ -19,5 +19,12 @@ return [
                 'database' => 'creative',
             ],
         ],
+
+        'layout' => [
+            'class' => \app\service\Layout::class,
+            'params' => [
+
+            ],
+        ],
     ],
 ];

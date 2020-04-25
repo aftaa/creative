@@ -27,7 +27,7 @@ class Kernel
     public function run()
     {
         $app = (object)[
-            'config' => $this->config,
+            'config' => &$this->config,
         ];
 
         new ServiceLocator($app);

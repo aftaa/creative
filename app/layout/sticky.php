@@ -37,7 +37,8 @@
 <header>
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="/"><?= $this->app->config['title'] ?></a>
+        <a class="navbar-brand" href="#" onclick="return false;"><?=
+            $this->app->config['title'] ?></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarCollapse" aria-controls="navbarCollapse"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -45,6 +46,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/about">Техническое задание</a>
+                </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="/create">Внесение информации
                     </a>
@@ -92,14 +96,19 @@
 
 
 <footer class="footer">
+
+
     <div class="container">
+        <div style="float: right;">
+            Сделано в «<a href="https://kuba.moscow/"
+                          target="_blank">Велосипед</a>»
+        </div>
         <span class="text-muted">
-            &copy; <?= date('Y') ?> <a href="mailto:mail@maxim-gabidullin
-            .ru">Maxim
+            &copy; <?= date('Y') ?> <a href="mailto:mail@maxim-gabidullin.ru">Maxim
                 Gabidullin</a>
         </span>
     </div>
 </footer>
-
+<?php require_once 'include/yandex.metrka.html' ?>
 </body>
 </html>

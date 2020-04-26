@@ -1,33 +1,20 @@
 <?php
 
-$this->breadcrumbs[] = [
-    'name' => 'Техническое задание',
-];
+require_once 'include/__autoload.php';
 
+try {
+    (new \creative\Kernel(
+        require_once 'app/config/config.php'
+    ))->run();
+
+} catch (Exception $e) {
 ?>
 
-<div class="container">
-    <div class="row">
-        <div class="col col-lg-8">
+    <h1>Exception!</h1>
+    <h2><?= $e->getMessage() ?></h2>
+    <h2>File: <?= $e->getFile() ?></h2>
+    <h4>Line: <?= $e->getLine() ?></h4>
+    <h5><pre><?= print_r($e->getTrace()) ?></pre></h5>
 
-            <p class="lead">Реализовать функционал телефонного справочника. Справочник
-                должен минимально содержать данные: ФИО абонента и&nbsp;телефон.
-
-            <h4>Функционал разделен на&nbsp;две&nbsp;части:</h4>
-
-            <ul style="list-style-type: decimal;">
-
-                <li>Внесение информации</li>
-
-                <li>Получение информации: Поиск абонента по&nbsp;телефону и&nbsp;наоборот. Поиск
-                    осуществлять без перезагрузки страницы. Оба функционала необходимо
-                    реализовать визуально. СУБД выбирается исполнителем. При внесении
-                    информации должна происходить валидация данных.
-                </li>
-
-            </ul>
-
-        </div>
-    </div>
-</div>
-
+<?php
+}

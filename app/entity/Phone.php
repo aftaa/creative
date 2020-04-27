@@ -3,6 +3,7 @@
 
 namespace app\entity;
 
+use DateTime;
 use Exception;
 
 /**
@@ -13,6 +14,7 @@ class Phone
 {
     private int $id;
     private string $phone;
+    private DateTime $createdAt;
 
     /**
      * Phone constructor.
@@ -63,6 +65,24 @@ class Phone
             throw new Exception("Phone number must have length 10.");
         }
         $this->phone = $phone;
+        return $this;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getCreatedAt(): DateTime
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param DateTime $createdAt
+     * @return Phone
+     */
+    public function setCreatedAt(DateTime $createdAt): Phone
+    {
+        $this->createdAt = $createdAt;
         return $this;
     }
 }

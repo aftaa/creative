@@ -1,3 +1,8 @@
 .nav-link:hover {
     text-decoration: underline;
 }
+
+#pagination a {
+    font-weight: normal !important;
+    margin-right: .5em;
+}

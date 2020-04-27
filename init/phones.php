@@ -14,4 +14,4 @@ $persons = (new PersonRepository($app->db))->findAllAsObject();
 
 (new PhoneRepository($app))->addPhones($persons);
 
-echo '<pre>'; print_r($persons); echo '</pre>'; die;
+echo '<pre>'; print_r($persons); echo '</pre>';

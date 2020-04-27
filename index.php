@@ -10,7 +10,7 @@ try {
 } catch (Exception $e) {
 ?>
 
-    <h1>Houston, we have an Exception!</h1>
+    <h1>Ooops, Houston, we have an uncaught Exception!</h1>
     <h2><?= $e->getMessage() ?></h2>
     <h2>File: <?= $e->getFile() ?></h2>
     <h4>Line: <?= $e->getLine() ?></h4>

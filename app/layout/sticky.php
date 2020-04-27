@@ -1,6 +1,10 @@
 <?php
 
+use creative\ViewLayout;
+
 /** @var stdClass $app */
+/** @var ViewLayout $this */
+
 
 ?><!doctype html>
 <html lang="ru">
@@ -28,12 +32,7 @@
 
     <!-- creative -->
     <link href="/css/creative.css" rel="stylesheet">
-    <script src="/js/phone.manipulation.js"></script>
-    <script>
-        $(document).ajaxError(function (xhr) {
-            alert(xhr.responseText)
-        });
-    </script>
+<!--    <script src="/js/phone.manipulation.js"></script>-->
 </head>
 
 <body>
@@ -74,7 +73,8 @@
 </header>
 
 <main role="main" class="container">
-    <h1 class="mt-5"><?= $this->app->config['title'] ?></h1>
+<!--    <h1 class="mt-5">--><?//= $this->app->config['title'] ?><!--</h1>-->
+    <h1 class="mt-5"></h1>
     <?php require_once '_breadcrumbs.php' ?>
     <div id="content"><?= $this->content ?? '' ?></div>
 </main>
@@ -83,7 +83,7 @@
     <div class="container">
         <div style="float: right;">
             Сделано на базе «<a href="https://kuba.moscow/"
-                                target="_blank">Велосипед фреймворк</a>»
+                                target="_blank">Свой Велосипед Фреймворк</a>»
         </div>
         <span class="text-muted">
             &copy; <?= date('Y') ?> <a href="mailto:mail@maxim-gabidullin.ru">Maxim

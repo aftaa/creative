@@ -24,6 +24,18 @@ class PersonManager
     }
 
     /**
+     * @param int $limit
+     * @param int $offset
+     * @return Person[]|array
+     * @throws \Exception
+     */
+    public function getPage(int $limit, int $offset)
+    {
+        return (new PersonRepository($this->app->db, $this->app))
+            ->findAllAsObject($limit, $offset);
+    }
+
+    /**
      * @return string[]
      */
     public function initPersonTableFromFile()
@@ -48,4 +60,5 @@ class PersonManager
 
         return $personRows;
     }
+
 }

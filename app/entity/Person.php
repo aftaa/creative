@@ -3,6 +3,8 @@
 
 namespace app\entity;
 
+use DateTime;
+
 /**
  * Class Person
  * @package app\entity
@@ -13,6 +15,7 @@ class Person
     private string $firstName;
     private string $lastName;
     private string $middleName;
+    private DateTime $createdAt;
     /** @var array Phone[] */
     private array $phones = [];
 
@@ -103,6 +106,24 @@ class Person
     public function addPhone(Phone $phone): Person
     {
         $this->phones[] = $phone;
+        return $this;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getCreatedAt(): DateTime
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param DateTime $createdAt
+     * @return Person
+     */
+    public function setCreatedAt(DateTime $createdAt): Person
+    {
+        $this->createdAt = $createdAt;
         return $this;
     }
 }

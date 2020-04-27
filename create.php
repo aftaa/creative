@@ -52,3 +52,9 @@ $this->breadcrumbs[] = [
 
         </div>
     </div>
+
+    <script>
+        $(function () {
+            $('#content').load('404.php');
+        })
+    </script>

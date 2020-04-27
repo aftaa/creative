@@ -8,7 +8,7 @@ use PDO;
 
 class Db implements \creative\interfaces\ServiceInterface
 {
-    private PDO $dbh;
+    public PDO $dbh;
 
     /**
      * @param array $params
@@ -23,7 +23,6 @@ class Db implements \creative\interfaces\ServiceInterface
         } catch (PDOException $e) {
             echo 'Подключение не удалось: ' . $e->getMessage();
         }
-
         return $this;
     }
 }

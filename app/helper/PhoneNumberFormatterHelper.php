@@ -9,7 +9,7 @@ use app\entity\Phone;
  * Class PhoneNumberFormatter
  * @package app\helper
  */
-class PhoneNumberFormatter
+class PhoneNumberFormatterHelper
 {
     const DEFAULT_FORMAT = '8 XXX XX-XX';
     private string $format = self::DEFAULT_FORMAT;

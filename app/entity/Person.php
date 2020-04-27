@@ -9,11 +9,30 @@ namespace app\entity;
  */
 class Person
 {
+    private int $id;
     private string $firstName;
     private string $lastName;
     private string $middleName;
     /** @var array Phone[] */
     private array $phones = [];
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return Person
+     */
+    public function setId(int $id): Person
+    {
+        $this->id = $id;
+        return $this;
+    }
 
     /**
      * @return string
@@ -78,12 +97,12 @@ class Person
     }
 
     /**
-     * @param Phone[] $phones
+     * @param Phone $phone
      * @return Person
      */
-    public function setPhones(array $phones): Person
+    public function addPhone(Phone $phone): Person
     {
-        $this->phones = $phones;
+        $this->phones[] = $phone;
         return $this;
     }
 }

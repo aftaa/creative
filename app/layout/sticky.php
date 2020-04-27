@@ -22,20 +22,23 @@
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
-    <script src="/js/jquery-3.2.1.slim.min.js"></script>
-    <script>window.jQuery || document.write('<script src="/js/jquery-slim.min.js"><\/script>')</script>
+    <script src="/js/jquery-3.5.0.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 
     <!-- creative -->
     <link href="/css/creative.css" rel="stylesheet">
     <script src="/js/phone.manipulation.js"></script>
+    <script>
+        $(document).ajaxError(function (xhr) {
+            alert(xhr.responseText)
+        });
+    </script>
 </head>
 
 <body>
 
 <header>
-    <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="#" onclick="return false;"><?=
             $this->app->config['title'] ?></a>
@@ -47,61 +50,40 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/about">Техническое задание</a>
+                    <a class="nav-link" href="/about">Техническое<br>задание</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/create">Внесение информации
+                    <a class="nav-link" href="/create">Внесение<br>информации
                     </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/list">Просмотр справочника</a>
+                    <a class="nav-link"
+                       href="/list">Просмотр<br>справочника</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/search">Поиск по
+                    <a class="nav-link" href="/search">Поиск<br>по
                         номеру телефона</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/find">Поиск по
+                    <a class="nav-link" href="/find">Поиск<br>по
                         абоненту</a>
                 </li>
             </ul>
-            <form class="form-inline mt-2 mt-md-0">
-                <input class="form-control mr-sm-2" type="text"
-                       placeholder="Поиск" aria-label="Поиск">
-                <button class="btn btn-outline-success my-2 my-sm-0"
-                        type="submit">Поиск
-                </button>
-            </form>
         </div>
     </nav>
 </header>
 
-<!-- Begin page content -->
 <main role="main" class="container">
     <h1 class="mt-5"><?= $this->app->config['title'] ?></h1>
-
     <?php require_once '_breadcrumbs.php' ?>
-
-    <p class="lead">
-        <?= $this->content ?? '' ?>
-    </p>
-
-    <!--    <p class="lead">Pin a fixed-height footer to the bottom of the viewport in-->
-    <!--        desktop browsers with this custom HTML and CSS. A fixed navbar has been-->
-    <!--        added with <code>padding-top: 60px;</code> on the <code>body &gt;-->
-    <!--            .container</code>.</p>-->
-    <!--    <p>Back to <a href="../sticky-footer/">the default sticky footer</a> minus-->
-    <!--        the navbar.</p>-->
+    <div id="content"><?= $this->content ?? '' ?></div>
 </main>
 
-
 <footer class="footer">
-
-
     <div class="container">
         <div style="float: right;">
-            Сделано в «<a href="https://kuba.moscow/"
-                          target="_blank">Велосипед</a>»
+            Сделано на базе «<a href="https://kuba.moscow/"
+                                target="_blank">Велосипед фреймворк</a>»
         </div>
         <span class="text-muted">
             &copy; <?= date('Y') ?> <a href="mailto:mail@maxim-gabidullin.ru">Maxim

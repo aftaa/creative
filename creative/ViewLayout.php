@@ -31,6 +31,7 @@ class ViewLayout
         ob_start();
         $app = $this->app;
         $this->breadcrumbs = [];
+
         if (file_exists($phpFile)) {
             require_once $phpFile;
             $this->content = ob_get_clean();

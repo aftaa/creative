@@ -15,6 +15,8 @@ return [
     'layout_path' => 'app/layout',
     'layout'      => '/sticky.php',
 
+    'person_data_filename' => 'init/data/persons.txt',
+
     'services' => [
         'db' => [
             'class'  => \app\service\Db::class,

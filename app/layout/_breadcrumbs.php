@@ -1,4 +1,8 @@
-<?php if ($this->breadcrumbs): ?>
+<?php
+
+/** @var stdClass $app */
+
+if ($this->breadcrumbs): ?>
     &gt; <a href="/"><?= $app->config['title'] ?></a>
     <?php foreach ($this->breadcrumbs as $breadcrumb): ?>
         <?php if (!empty($breadcrumb['href'])): ?>

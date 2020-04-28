@@ -5,7 +5,7 @@ login creative
 password bztKjUTCY
 
 
-db
+## db
 
 https://server.microweb.info:2222/phpmyadmin
 
@@ -14,6 +14,6 @@ login usoafterya_creative
 password usoafterya_creative
 
 
-init
+## init
 
 http://creative.maxim-gabidullin.ru/init/data/

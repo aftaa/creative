@@ -15,6 +15,6 @@ $this->breadcrumbs[] = [
 
 <script>
     $(function () {
-        $('#content').load('/ajax/list?limit=5');
+        $('#content').load('/ajax/list?limit=10');
     });
 </script>

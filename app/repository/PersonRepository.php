@@ -68,7 +68,7 @@ class PersonRepository
      */
     public function findAllAsObject(?int $limit, ?int $offset): array
     {
-        $sql = "SELECT * FROM person";
+        $sql = "SELECT * FROM person ORDER BY created_at DESC";
 
         if ($limit) {
             $sql .= " LIMIT $limit OFFSET $offset ";
@@ -93,5 +93,21 @@ class PersonRepository
         (new PhoneRepository($this->app))->findAllAndAddPartnerPhones($persons);
 
         return $persons;
+    }
+
+    /**
+     * @param Person $person
+     * @return string
+     */
+    public function pushPerson(Person $person)
+    {
+        $sql = "INSERT INTO person SET first_name=?,last_name=?,middle_name=?";
+        $stmt = $this->db->dbh->prepare($sql);
+        $stmt->execute([
+            $person->getFirstName(),
+            $person->getLastName(),
+            $person->getMiddleName()
+        ]);
+        return $this->db->dbh->lastInsertId();
     }
 }

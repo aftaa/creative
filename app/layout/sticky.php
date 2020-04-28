@@ -32,7 +32,7 @@ use creative\ViewLayout;
 
     <!-- creative -->
     <link href="/css/creative.css" rel="stylesheet">
-<!--    <script src="/js/phone.manipulation.js"></script>-->
+    <script src="/js/phone.manipulation.js"></script>
 </head>
 
 <body>

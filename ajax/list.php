@@ -2,6 +2,7 @@
 
 use app\helper\PhoneNumberFormatterHelper;
 use app\manager\PersonManager;
+use app\repository\PersonRepository;
 use creative\ViewLayout;
 
 /** @var stdClass $app */
@@ -11,7 +12,7 @@ $manager = new PersonManager($app);
 
 $limit = $_REQUEST['limit'] ?? 5;
 $offset = $_REQUEST['offset'] ?? 0;
-$total = (new \app\repository\PersonRepository($app->db, $app))->howMuch();
+$total = (new PersonRepository($app->db, $app))->howMuch();
 $pages = ceil($total / $limit);
 
 $persons = $manager->getPage($limit, $offset);

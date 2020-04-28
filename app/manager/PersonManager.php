@@ -61,4 +61,17 @@ class PersonManager
         return $personRows;
     }
 
+    /**
+     * @param array $form
+     * @return Person
+     */
+    public function createPersonFromForm(array $form): Person
+    {
+        return (new Person)
+            ->setFirstName($form['first_name'])
+            ->setLastName($form['last_name'])
+            ->setMiddleName($form['middle_name']);
+
+    }
+
 }

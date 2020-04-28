@@ -134,4 +134,19 @@ class PhoneRepository
 
         return $persons;
     }
+
+    /**
+     * @param Phone $phone
+     * @param int $personId
+     * @return string
+     */
+    public function savePhone(Phone $phone, int $personId)
+    {
+        $stmt = $this->db->dbh->prepare('INSERT INTO phone SET phone=:phone, person_id=:person');
+        $stmt->execute([
+            'phone'  => $phone->getPhone(),
+            'person' => $personId,
+        ]);
+        return $this->db->dbh->lastInsertId();
+    }
 }

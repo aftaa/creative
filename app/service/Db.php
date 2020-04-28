@@ -20,6 +20,7 @@ class Db implements \creative\interfaces\ServiceInterface
         $dsn = "mysql:dbname=$params[database];host=$params[hostname]";
         try {
             $this->dbh = new PDO($dsn, $params['username'], $params['password']);
+			$this->dbh->prepare('SET NAMES UTF8')->execute();
         } catch (PDOException $e) {
             echo 'Подключение не удалось: ' . $e->getMessage();
         }

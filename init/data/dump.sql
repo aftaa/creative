@@ -13,9 +13,9 @@
 
 
 -- Дамп структуры базы данных creative
-DROP DATABASE IF EXISTS `creative`;
-CREATE DATABASE IF NOT EXISTS `creative` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `creative`;
+-- DROP DATABASE IF EXISTS `creative`;
+-- CREATE DATABASE IF NOT EXISTS `creative` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+-- USE `creative`;
 
 -- Дамп структуры для таблица creative.person
 DROP TABLE IF EXISTS `person`;

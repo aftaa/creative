@@ -4,6 +4,7 @@
 namespace app\repository;
 
 use app\entity\Person;
+use app\entity\Phone;
 use app\service\Db;
 use DateTime;
 use Exception;
@@ -117,19 +118,19 @@ class PersonRepository
     }
 
     /**
-     * @param string $words
+     * @param string $s
      * @return Person[]
      * @throws Exception
      */
-    public function findWords(string $words): array
+    public function findWords(string $s): array
     {
-        $sql = "SELECT * FROM `person` JOIN phone ON person_id=person.id" .
-            "WHERE MATCH (first_name,last_name,middle_name) AGAINST '$words'";
+        $sql = "SELECT * FROM `person` JOIN phone ON person_id=person.id"
+            . " WHERE MATCH (first_name,last_name,middle_name) AGAINST (?)";
         $stmt = $this->db->dbh->prepare($sql);
-        $stmt->execute();
-        $rows = $stmt->fetchAll();
-        echo '<pre>'; print_r($rows); echo '</pre>'; die;
 
+        $stmt->execute([$s]);
+        $rows = $stmt->fetchAll();
+        $phoneRepository = new PhoneRepository($this->app);
         /** @var Person[] $persons */
         $persons = [];
         foreach ($rows as $row) {
@@ -138,7 +139,8 @@ class PersonRepository
                 ->setFirstName($row['first_name'])
                 ->setMiddleName($row['middle_name'])
                 ->setLastName($row['last_name'])
-                ->setCreatedAt(new DateTime($row['created_at']));
+                ->setCreatedAt(new DateTime($row['created_at']))
+                ->addPhone(new Phone($row['phone'], 0));
             $persons[$person->getId()] = $person;
         }
 

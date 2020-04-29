@@ -7,9 +7,9 @@ use creative\ViewLayout;
 /** @var stdClass $app */
 /** @var ViewLayout $this */
 
-$words = $_REQUEST['s'] ?? '';
+$s = $_REQUEST['s'] ?? '';
 $repository = new PersonRepository($app->db, $app);
-$persons = $repository->findWords($_REQUEST['s'] ?? '');
+$persons = $repository->findWords($s ?? '');
 
 ?>
 
@@ -33,8 +33,7 @@ $persons = $repository->findWords($_REQUEST['s'] ?? '');
                 <td>
                     <?php foreach ($person->getPhones() as $phone): ?>
                         <?= $phone->getPhone() ?>
-                        <br>
-                    <?php endforeach ?>
+                    <?php endforeach; ?>
                 </td>
                 <td>
                     <?= $person->getCreatedAt()->format('d.m.Y H:i') ?>
@@ -61,21 +60,21 @@ $persons = $repository->findWords($_REQUEST['s'] ?? '');
     </tfoot>
 </table>
 
-<!--<script>-->
-<!--    "use strict";-->
-<!---->
-<!--    $(function () {-->
-<!--        $('#pagination a').on('click', function () {-->
-<!--            $(document).css({cursor: 'wait'});-->
-<!--            let limit = this.dataset.limit;-->
-<!--            let offset = this.dataset.offset;-->
-<!--            $('#result').load('/ajax/find', {-->
-<!--                'limit': limit,-->
-<!--                'offset': offset,-->
-<!--            }, function () {-->
-<!--                $(document).css({cursor: 'normal'});-->
-<!--            });-->
-<!--            return false;-->
-<!--        })-->
-<!--    });-->
-<!--</script>-->
+<!--<script>
+    "use strict";
+
+    $(function () {
+        $('#pagination a').on('click', function () {
+            $(document).css({cursor: 'wait'});
+            let limit = this.dataset.limit;
+            let offset = this.dataset.offset;
+            $('#result').load('/ajax/find', {
+                'limit': limit,
+                'offset': offset,
+            }, function () {
+                $(document).css({cursor: 'normal'});
+            });
+            return false;
+        })
+    });
+</script>-->

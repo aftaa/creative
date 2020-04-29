@@ -42,7 +42,8 @@ $phoneNumberHelper = new PhoneNumberFormatterHelper(
             <td><?= $person->getMiddleName() ?></td>
             <td>
                 <?php foreach ($person->getPhones() as $phone): ?>
-                    <?= $phoneNumberHelper->format($phone) ?>
+                    <?//= $phoneNumberHelper->format($phone) ?>
+                <?php echo $phone->getPhone() ?>
                     <br>
                 <?php endforeach ?>
             </td>

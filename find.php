@@ -24,7 +24,7 @@ $this->breadcrumbs[] = [
                 <div class="col-xs-12">
                     <div class="form-group">
                         <input type="text" class="form-control"
-                               id="name"
+                               id="s"
                                placeholder="" required>
                         <!--                        <input type="submit" class="btn btn-default"-->
                         <!--                               value="Поиск">-->

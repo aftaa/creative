@@ -9,6 +9,7 @@ use app\entity\Phone;
 use app\service\Db;
 use DateTime;
 use Exception;
+use PDO;
 
 class PhoneRepository
 {
@@ -76,9 +77,10 @@ class PhoneRepository
     public function searchPersonsWithPhone($number, $limit, $offset): array
     {
         $number = preg_replace('/[^0-9]/', '', $number);
-        if ($number[0] == 7) {
+        if ($number[0] == 7 && strlen($number) > 10) {
             $number = substr($number, 1, 10);
         }
+
 
         $sql = "SELECT * FROM phone JOIN person ON person_id=person.id ";
         $sql .= " WHERE phone LIKE '%$number%' ORDER BY person.created_at DESC";
@@ -86,10 +88,13 @@ class PhoneRepository
             $sql .= " LIMIT $limit OFFSET $offset ";
         }
 
+        //echo $sql;
+
         $stmt = $this->db->dbh->prepare($sql);
         $stmt->execute();
         //echo '<pre>'; print_r($stmt->errorInfo()); echo '</pre>';
         $rows = $stmt->fetchAll();
+//        echo '<pre>'; print_r($rows); echo '</pre>'; die;
         /** @var Person[] $persons */
         $persons = [];
 
@@ -118,18 +123,15 @@ class PhoneRepository
         $personsId = array_keys($persons);
         $personsId = join(',', $personsId);
 
-        $sql = "SELECT id, phone, person_id FROM phone WHERE person_id IN($personsId)";
-        $stmt = $this->db->dbh->prepare($sql);
-        $stmt->execute();
-        $rows = $stmt->fetchAll();
-
         foreach ($persons as $person) {
-            foreach ($rows as $row) {
-                if ($row['person_id'] == $person->getId()) {
-                    $phone = new Phone($row['phone'], $row['id']);
-                    $person->addPhone($phone);
-                }
+
+            $phones = $this->findPersonPhones($person->getId());
+
+            foreach ($phones as $phone) {
+                $person->addPhone($phone);
             }
+
+//            echo '<pre>'; print_r($person); echo '</pre>'; die;
         }
 
         return $persons;
@@ -148,5 +150,22 @@ class PhoneRepository
             'person' => $personId,
         ]);
         return $this->db->dbh->lastInsertId();
+    }
+
+    public function findPersonPhones(int $personId): array
+    {
+        $stmt = $this->db->dbh->prepare('SELECT * FROM phone WHERE person_id=:person_id');
+        $stmt->execute([
+            'person_id' => $personId,
+        ]);
+
+        /** @var Phone[] $phones */
+        $phones = [];
+        $all = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($all as $row) {
+            $phone = new Phone($row['phone'], $personId);
+            $phones[] = $phone;
+        }
+        return $phones;
     }
 }

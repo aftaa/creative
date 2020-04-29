@@ -40,7 +40,7 @@ $pages = ceil(count($persons) / $limit);
             <td><?= $person->getId() ?></td>
             <td>
                 <?php foreach ($person->getPhones() as $phone): ?>
-                    <?= $phoneNumberHelper->format($phone) ?>
+                    <?= ($phone)->getPhone() ?>
                     <br>
                 <?php endforeach ?>
             </td>

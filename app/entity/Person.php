@@ -110,6 +110,16 @@ class Person
     }
 
     /**
+     * @param $phones
+     * @return Person;
+     */
+    public function addPhones($phones)
+    {
+        $this->phones = $phones;
+        return $this;
+    }
+
+    /**
      * @return DateTime
      */
     public function getCreatedAt(): DateTime

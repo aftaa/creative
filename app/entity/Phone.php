@@ -64,11 +64,6 @@ class Phone
         if (10 != strlen($phone)) {
             throw new Exception("Phone number must have length 10.");
         }
-
-        if (!filter_var($email_a, FILTER_VALIDATE_EMAIL)) {
-            throw new Exception("Phone number is wrong.");
-        }
-
         $this->phone = $phone;
         return $this;
     }

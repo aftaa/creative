@@ -1,30 +1,16 @@
 <?php
 
 use app\entity\Person;
+use app\repository\PersonRepository;
 use creative\ViewLayout;
 
 /** @var stdClass $app */
 /** @var ViewLayout $this */
 
-$name = $_REQUEST['name'] ?? '';
+$words = $_REQUEST['s'] ?? '';
+$repository = new PersonRepository($app->db, $app);
+$persons = $repository->findWords($_REQUEST['s'] ?? '');
 
-/** @var PDO $db */
-$db = $app->db;
-
-$stmt = $db->dbh->prepare("SELECT * FROM `person` WHERE MATCH (first_name,last_name,middle_name) AGAINST '$name'");
-
-$rows = $stmt->fetchAll();
-echo '<pre>'; print_r($rows); echo '</pre>';
-$persons = [];
-foreach ($rows as $row) {
-    $person = (new Person)
-        ->setId($row['id'])
-        ->setFirstName($row['first_name'])
-        ->setMiddleName($row['middle_name'])
-        ->setLastName($row['last_name'])
-        ->setCreatedAt(new DateTime($row['created_at']));
-    $persons[$person->getId()] = $person;
-}
 ?>
 
 <table class="table table-hover">
@@ -36,25 +22,27 @@ foreach ($rows as $row) {
     <th>Телефон(ы)</th>
     <th>Дата создания</th>
     </thead>
-    <tbody>
-    <?php foreach ($persons as $person): ?>
-        <tr>
-            <td><?= $person->getId() ?></td>
-            <td><?= $person->getFirstName() ?></td>
-            <td><?= $person->getLastName() ?></td>
-            <td><?= $person->getMiddleName() ?></td>
-            <td>
-                <?php foreach ($person->getPhones() as $phone): ?>
-                    <?= $phoneNumberHelper->format($phone) ?>
-                    <br>
-                <?php endforeach ?>
-            </td>
-            <td>
-                <?= $person->getCreatedAt()->format('d.m.Y H:i') ?>
-            </td>
-        </tr>
-    <?php endforeach ?>
-    </tbody>
+    <?php if (!empty($persons)): ?>
+        <tbody>
+        <?php foreach ($persons as $person): ?>
+            <tr>
+                <td><?= $person->getId() ?></td>
+                <td><?= $person->getFirstName() ?></td>
+                <td><?= $person->getLastName() ?></td>
+                <td><?= $person->getMiddleName() ?></td>
+                <td>
+                    <?php foreach ($person->getPhones() as $phone): ?>
+                        <?= $phone->getPhone() ?>
+                        <br>
+                    <?php endforeach ?>
+                </td>
+                <td>
+                    <?= $person->getCreatedAt()->format('d.m.Y H:i') ?>
+                </td>
+            </tr>
+        <?php endforeach ?>
+        </tbody>
+    <?php endif ?>
     <tfoot>
     <tr>
         <th colspan="99">
@@ -73,21 +61,21 @@ foreach ($rows as $row) {
     </tfoot>
 </table>
 
-<script>
-    "use strict";
-
-    $(function () {
-        $('#pagination a').on('click', function () {
-            $(document).css({cursor: 'wait'});
-            let limit = this.dataset.limit;
-            let offset = this.dataset.offset;
-            $('#result').load('/ajax/find', {
-                'limit': limit,
-                'offset': offset,
-            }, function () {
-                $(document).css({cursor: 'normal'});
-            });
-            return false;
-        })
-    });
-</script>
+<!--<script>-->
+<!--    "use strict";-->
+<!---->
+<!--    $(function () {-->
+<!--        $('#pagination a').on('click', function () {-->
+<!--            $(document).css({cursor: 'wait'});-->
+<!--            let limit = this.dataset.limit;-->
+<!--            let offset = this.dataset.offset;-->
+<!--            $('#result').load('/ajax/find', {-->
+<!--                'limit': limit,-->
+<!--                'offset': offset,-->
+<!--            }, function () {-->
+<!--                $(document).css({cursor: 'normal'});-->
+<!--            });-->
+<!--            return false;-->
+<!--        })-->
+<!--    });-->
+<!--</script>-->

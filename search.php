@@ -20,8 +20,8 @@ $this->breadcrumbs[] = [
         <div class="col-md-6 col-md-offset-3 well">
             <form class="form" action="">
 
-                <p class="lead">Введите телефонный номер</p>
-                <small>полностью или частично</small>
+                <p class="lead">Введите телефонный номер<br>
+                <small>или его часть:</small></p>
 
                 <div class="col-xs-12">
                     <div class="form-group">

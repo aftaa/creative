@@ -6,6 +6,7 @@ namespace app\repository;
 use app\entity\Person;
 use app\service\Db;
 use DateTime;
+use Exception;
 use PDO;
 
 
@@ -64,7 +65,7 @@ class PersonRepository
      * @param int|null $limit
      * @param int|null $offset
      * @return Person[]|array
-     * @throws \Exception
+     * @throws Exception
      */
     public function findAllAsObject(?int $limit, ?int $offset): array
     {
@@ -86,11 +87,15 @@ class PersonRepository
                 ->setFirstName($row['first_name'])
                 ->setMiddleName($row['middle_name'])
                 ->setLastName($row['last_name'])
-                ->setCreatedAt(new DateTime($row['created_at']));
+                ->setCreatedAt(new DateTime($row['created_at']))
+                ->addPhones((new PhoneRepository($this->app))->findPersonPhones($row['id']));
+
+            ;
+
             $persons[$person->getId()] = $person;
         }
 
-        (new PhoneRepository($this->app))->findAllAndAddPartnerPhones($persons);
+//        $persons = (new PhoneRepository($this->app))->findAllAndAddPartnerPhones($persons);
 
         return $persons;
     }
@@ -109,5 +114,34 @@ class PersonRepository
             $person->getMiddleName()
         ]);
         return $this->db->dbh->lastInsertId();
+    }
+
+    /**
+     * @param string $words
+     * @return Person[]
+     * @throws Exception
+     */
+    public function findWords(string $words): array
+    {
+        $sql = "SELECT * FROM `person` JOIN phone ON person_id=person.id" .
+            "WHERE MATCH (first_name,last_name,middle_name) AGAINST '$words'";
+        $stmt = $this->db->dbh->prepare($sql);
+        $stmt->execute();
+        $rows = $stmt->fetchAll();
+        echo '<pre>'; print_r($rows); echo '</pre>'; die;
+
+        /** @var Person[] $persons */
+        $persons = [];
+        foreach ($rows as $row) {
+            $person = (new Person)
+                ->setId($row['id'])
+                ->setFirstName($row['first_name'])
+                ->setMiddleName($row['middle_name'])
+                ->setLastName($row['last_name'])
+                ->setCreatedAt(new DateTime($row['created_at']));
+            $persons[$person->getId()] = $person;
+        }
+
+        return $persons;
     }
 }

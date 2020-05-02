@@ -45,36 +45,8 @@ $persons = $repository->findWords($s ?? '');
     <tfoot>
     <tr>
         <th colspan="99">
-<!--            <div style="font-size: 13px" id="pagination">-->
-<!--                --><?php //for ($i = 0; $i < $pages; $i++): ?>
-<!--                    <a href="#"-->
-<!--                       data-offset="--><?//= $i * $limit ?><!--"-->
-<!--                       data-limit="--><?//= $limit ?><!--">-->
-<!--                        --><?//= $i + 1 ?>
-<!--                    </a>-->
-<!--                --><?php //endfor ?>
-<!--            </div>-->
         </th>
     </tr>
 
     </tfoot>
 </table>
-
-<!--<script>
-    "use strict";
-
-    $(function () {
-        $('#pagination a').on('click', function () {
-            $(document).css({cursor: 'wait'});
-            let limit = this.dataset.limit;
-            let offset = this.dataset.offset;
-            $('#result').load('/ajax/find', {
-                'limit': limit,
-                'offset': offset,
-            }, function () {
-                $(document).css({cursor: 'normal'});
-            });
-            return false;
-        })
-    });
-</script>-->

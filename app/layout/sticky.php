@@ -73,7 +73,6 @@ use creative\ViewLayout;
 </header>
 
 <main role="main" class="container">
-<!--    <h1 class="mt-5">--><?//= $this->app->config['title'] ?><!--</h1>-->
     <h1 class="mt-5"></h1>
     <?php require_once '_breadcrumbs.php' ?>
     <div id="content"><?= $this->content ?? '' ?></div>
